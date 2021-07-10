@@ -14,13 +14,13 @@
             <fieldset>
                 <legend>Dados do(a) competidor(a)</legend>
                 <label for="nome">Seu nome:</label>
-                <input type="text" name="nome" id="nome" placeholder="Seu nome..." required="required"> <br>
+                <input type="text" name="nome" id="nome" maxlength="100" placeholder="Seu nome..." required="required"> <br>
                 
                 <br><label for="idade">Sua idade:</label>
-                <input type="number" id="idade" name="idade" required="required" placeholder="Sua idade"> <br> <br>
+                <input type="number" id="idade" name="idade" maxlength="3" min="0" max="130" placeholder="Sua idade" required="required"> <br> <br>
                 
-                <input type="submit" value="Enviar"> <br>
-            </fieldset>
+                <input type="submit" value="Enviar" name="enviar"> <br>
+            </fieldset>                    
         </form>
     </body>
 </html>
