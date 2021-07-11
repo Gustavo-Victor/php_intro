@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+    include_once ('servicos/servicoMensagem.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,9 +15,16 @@
         <!--Exibir mensagem em caso de erro-->
         <div id="erro">
             <?php 
-                if(isset($_SESSION['mensagem_erro']) && !empty($_SESSION['mensagem_erro'])){
-                    echo "<script>alert('".$_SESSION['mensagem_erro']."')</script>";
-                    unset($_SESSION['mensagem_erro']);
+                $mensagem_sucesso = obterMensagemSucesso();
+                if(!empty($mensagem_sucesso)){
+                    echo "<script>alert('".$mensagem_sucesso."')</script>";
+                    removerMensagemSucesso();
+                }else{
+                    $mensagem_erro = obterMensagemErro();
+                    if(!empty($mensagem_erro)){
+                        echo "<script>alert('".$mensagem_erro."')</script>";
+                        removerMensagemErro();
+                    }
                 }
             ?>
         </div>
@@ -35,20 +42,5 @@
                 <input type="submit" value="Enviar" name="enviar"> <br>
             </fieldset>                    
         </form>
-
-        <!--Mostrar informações dos competidores-->
-        <div id="mostrar">
-            <?php 
-                if(isset($_SESSION['mostrar']) && $_SESSION['mostrar'] == true){
-                    echo "<p><b>Nome: </b>".$_SESSION['nome']."</p>";
-                    echo "<p><b>Idade: </b>".$_SESSION['idade']."</p>";
-                    echo "<p><b>Categoria: </b>".$_SESSION['categoria']."</p>";
-                    unset($_SESSION['mostrar']);
-                    unset($_SESSION['categoria']);
-                    unset($_SESSION['nome']);
-                    unset($_SESSION['idade']);
-                }
-            ?>
-        </div>
     </body>
 </html>
