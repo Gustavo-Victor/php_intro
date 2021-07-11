@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -9,18 +12,43 @@
     <body>
 
         <h2>Formulário para Inscrição de competidores de natação</h2>
+        <!--Exibir mensagem em caso de erro-->
+        <div id="erro">
+            <?php 
+                if(isset($_SESSION['mensagem_erro']) && !empty($_SESSION['mensagem_erro'])){
+                    echo "<script>alert('".$_SESSION['mensagem_erro']."')</script>";
+                    unset($_SESSION['mensagem_erro']);
+                }
+            ?>
+        </div>
 
+        <!--Formulário para inserção de competidores-->
         <form action="script.php" method="POST" name="formulario" id="form">
             <fieldset>
                 <legend>Dados do(a) competidor(a)</legend>
                 <label for="nome">Seu nome:</label>
-                <input type="text" name="nome" id="nome" maxlength="100" placeholder="Seu nome..." required="required"> <br>
+                <input type="text" name="nome" id="nome" placeholder="Seu nome..."> <br>
                 
                 <br><label for="idade">Sua idade:</label>
-                <input type="number" id="idade" name="idade" maxlength="3" min="0" max="130" placeholder="Sua idade" required="required"> <br> <br>
+                <input type="text" id="idade" name="idade" placeholder="Sua idade"> <br> <br>
                 
                 <input type="submit" value="Enviar" name="enviar"> <br>
             </fieldset>                    
         </form>
+
+        <!--Mostrar informações dos competidores-->
+        <div id="mostrar">
+            <?php 
+                if(isset($_SESSION['mostrar']) && $_SESSION['mostrar'] == true){
+                    echo "<p><b>Nome: </b>".$_SESSION['nome']."</p>";
+                    echo "<p><b>Idade: </b>".$_SESSION['idade']."</p>";
+                    echo "<p><b>Categoria: </b>".$_SESSION['categoria']."</p>";
+                    unset($_SESSION['mostrar']);
+                    unset($_SESSION['categoria']);
+                    unset($_SESSION['nome']);
+                    unset($_SESSION['idade']);
+                }
+            ?>
+        </div>
     </body>
 </html>
